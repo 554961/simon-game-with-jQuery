@@ -17,6 +17,9 @@ function initGame()
                 $("#level-title").text("level 1")
                 $("#startup")[0].play();
                 orderOfColorsToPress = [];
+                $("#level-title").text("level 1").removeClass("game-over");
+
+
             }   
         })
     isInit = true;
@@ -65,12 +68,23 @@ function checkClick()
 // checks if the userse combination clicked is the same random one
 function checkCombination()
 {
-    if (usersCombination == orderOfColorsToPress) generateRandColor();
+    console.log("CHECKING COMBINATION:");
+    console.log("users combination: " + usersCombination);
+    console.log("random order: " + orderOfColorsToPress);
+    console.log(usersCombination === orderOfColorsToPress);
+
+    for (i = 0; i < orderOfColorsToPress.length; i++){
+    if (orderOfColorsToPress[i] === usersCombination[i])
+        {
+            generateRandColor();
+            console.log("GOod combinationm");
+        }
     else 
-    {
-        console.log("game over");
-        
-        $("#level-title").text("GAME OVER").addClass("game-over");
+        {
+            console.log("game over");
+            
+            $("#level-title").text("GAME OVER").addClass("game-over");
+        }
     }
 }
 
@@ -85,7 +99,7 @@ function generateRandColor()
 
     orderOfColorsToPress.push(color);
 
-    console.log(orderOfColorsToPress);
+    console.log("random order: " + orderOfColorsToPress);
 }
 
 function updateLevelNum(num)
@@ -94,7 +108,6 @@ function updateLevelNum(num)
 }
 
 function animatePress(currentColor){
-    console.log("animating");
     $("#" + currentColor).addClass("pressed");
     setTimeout(function()
     {
