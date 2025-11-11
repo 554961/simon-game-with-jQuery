@@ -5,6 +5,9 @@
 //     3. fix random selector system
 //-------------------------------------------------------
 
+
+
+
 // create sounds for playing them inside checkClick()
 const blueSFX = new Audio("sounds/blue.mp3");
 const greenSFX = new Audio("sounds/green.mp3");
@@ -51,13 +54,18 @@ function checkClick()
     $('#red').click(e => redSFX.play());
     $('#yellow').click(e => yellowSFX.play());
 
+    //checking if color clicked
     $("#green").click(function()
     {
+        
         console.log("green clicked");
         animatePress("green");
         usersCombination.push("green");
         console.log("users: " + usersCombination);
         checkCombination();
+        //Debugging the orderOfColorsToPress and usersCombination
+        document.getElementById("debugging1").firstChild.textContent = usersCombination;
+
     });
     $("#red").click(function()
     {
@@ -67,6 +75,8 @@ function checkClick()
         usersCombination.push("red");
         console.log("users: " + usersCombination);
         checkCombination();
+        //Debugging the orderOfColorsToPress and usersCombination
+        document.getElementById("debugging1").firstChild.textContent = usersCombination;
     });
     $("#yellow").click(function()
     {
@@ -76,6 +86,8 @@ function checkClick()
         usersCombination.push("yellow");
         console.log("users: " + usersCombination);
         checkCombination();
+        //Debugging the orderOfColorsToPress and usersCombination
+        document.getElementById("debugging1").firstChild.textContent = usersCombination;
     });
     $("#blue").click(function()
     {
@@ -84,6 +96,8 @@ function checkClick()
         usersCombination.push("blue");
         console.log("users: " + usersCombination);
         checkCombination();
+        //Debugging the orderOfColorsToPress and usersCombination
+        document.getElementById("debugging1").firstChild.textContent = usersCombination;
     });
     
 }
@@ -123,6 +137,9 @@ function generateRandColor()
     orderOfColorsToPress.push(color);
 
     console.log("random order: " + orderOfColorsToPress);
+    // debugging
+    document.getElementById("debugging2").firstChild.textContent = orderOfColorsToPress;
+
 }
 
 function updateLevelNum(num)
@@ -148,8 +165,8 @@ function main()
 }
 
 
-// Main program
 
+// Main program
 //Setup game once
 if (!isInit) initGame();
 isInit = true;
