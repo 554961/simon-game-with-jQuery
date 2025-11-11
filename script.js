@@ -1,8 +1,7 @@
 //-------------------------------------------------------
 // TODO:
-//     1. play respective sound when color pressed
-//     2. fix round system
-//     3. fix random selector system
+//      1. CHECK & COMPARE USING THE LENGTH OF THE 'orderOfColorsToPress' ARRAY 
+//          IF THE USER HAS FAILED OR NOT
 //-------------------------------------------------------
 
 
@@ -18,6 +17,7 @@ const wrongSFX = new Audio("sounds/wrong.mp3");
 
 var levelNumber = 1;
 var isInit = false;
+var isGameOver = false;
 
 var orderOfColorsToPress = [];
 var usersCombination = [];
@@ -37,6 +37,7 @@ function initGame()
                 // $("#coc_startup")[0].play();
                 // $("#startup")[0].play();
                 orderOfColorsToPress = [];
+                usersCombination = [];
                 $("#level-title").text("level 1").removeClass("game-over");
                 generateRandColor();
                 animatePress(orderOfColorsToPress[0]);
@@ -120,6 +121,7 @@ function checkCombination()
             {
                 console.log("NOT valid combination");
                 console.log("game over");
+                isGameOver = true;
                 
                 $("#level-title").text("GAME OVER").addClass("game-over");
                 break;
@@ -153,6 +155,7 @@ function generateRandColor()
 //update current level
 async function updateLevelNum()
 {
+    if (isGameOver) return;
     levelNumber++;
     $("#level-title").text("level " + levelNumber);
     for (i = 0; i < orderOfColorsToPress.length; i++)
