@@ -31,9 +31,9 @@ function initGame()
         {
             if (event.key == "a")
             {
-                // start game
+                // start/reset game
                 $("#level-title").text("level 1")
-                //PLAY THESE SOUNDS AFTER DEBUGGING
+                //PLAY 1 of THESE SOUNDS AFTER DEBUGGING
                 // $("#coc_startup")[0].play();
                 // $("#startup")[0].play();
                 orderOfColorsToPress = [];
