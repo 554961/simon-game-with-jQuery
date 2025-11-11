@@ -33,12 +33,13 @@ function initGame()
             {
                 // start game
                 $("#level-title").text("level 1")
-                $("#coc_startup")[0].play();
+                //PLAY THESE SOUNDS AFTER DEBUGGING
+                // $("#coc_startup")[0].play();
                 // $("#startup")[0].play();
                 orderOfColorsToPress = [];
                 $("#level-title").text("level 1").removeClass("game-over");
-
-
+                generateRandColor();
+                animatePress(orderOfColorsToPress[0]);
             }   
         })
     isInit = true;
@@ -107,22 +108,29 @@ function checkCombination()
 {
     console.log("CHECKING COMBINATION:");
     console.log("users combination: " + usersCombination);
-    console.log("random order: " + orderOfColorsToPress);
-    console.log(usersCombination === orderOfColorsToPress);
+    console.log("current random order: " + orderOfColorsToPress);
 
     for (i = 0; i < orderOfColorsToPress.length; i++){
-    if (orderOfColorsToPress[i] === usersCombination[i])
-        {
-            generateRandColor();
-            console.log("valid combination");
-        }
-    else 
-        {
-            console.log("game over");
-            
-            $("#level-title").text("GAME OVER").addClass("game-over");
-        }
+        if (orderOfColorsToPress[i] === usersCombination[i])
+            {
+                
+                console.log("valid combination");
+            }
+        else 
+            {
+                console.log("NOT valid combination");
+                console.log("game over");
+                
+                $("#level-title").text("GAME OVER").addClass("game-over");
+                break;
+            }
     }
+
+
+
+    // then add a new random color after checking if the arrays are equal
+    generateRandColor();
+    updateLevelNum();
 }
 
 function generateRandColor()
@@ -136,16 +144,23 @@ function generateRandColor()
 
     orderOfColorsToPress.push(color);
 
-    console.log("random order: " + orderOfColorsToPress);
+    console.log("new random order: " + orderOfColorsToPress);
     // debugging
     document.getElementById("debugging2").firstChild.textContent = orderOfColorsToPress;
 
 }
 
-function updateLevelNum(num)
+//update current level
+function updateLevelNum()
 {
-    $("#level-title").text("level " + num)
+    levelNumber++;
+    $("#level-title").text("level " + levelNumber);
+    for (i = 0; i < orderOfColorsToPress.length; i++)
+    {
+        animatePress(orderOfColorsToPress[i]);
+    }
 }
+
 
 function animatePress(currentColor){
     $("#" + currentColor).addClass("pressed");
@@ -158,9 +173,6 @@ function animatePress(currentColor){
 
 function main()
 {
-    generateRandColor();
-    
-
     checkClick();
 }
 
