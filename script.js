@@ -1,3 +1,10 @@
+//-------------------------------------------------------
+// TODO:
+//     1. play respective sound when color pressed
+//     2. fix round system
+//     3. fix random selector system
+//-------------------------------------------------------
+
 var levelNumber = 1;
 var isInit = false;
 
