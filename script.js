@@ -151,16 +151,20 @@ function generateRandColor()
 }
 
 //update current level
-function updateLevelNum()
+async function updateLevelNum()
 {
     levelNumber++;
     $("#level-title").text("level " + levelNumber);
     for (i = 0; i < orderOfColorsToPress.length; i++)
     {
+        await sleep(1000);
         animatePress(orderOfColorsToPress[i]);
     }
 }
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 function animatePress(currentColor){
     $("#" + currentColor).addClass("pressed");
