@@ -5,6 +5,14 @@
 //     3. fix random selector system
 //-------------------------------------------------------
 
+// create sounds for playing them inside checkClick()
+const blueSFX = new Audio("sounds/blue.mp3");
+const greenSFX = new Audio("sounds/green.mp3");
+const yellowSFX = new Audio("sounds/yellow.mp3");
+const redSFX = new Audio("sounds/red.mp3");
+const wrongSFX = new Audio("sounds/wrong.mp3");
+
+
 var levelNumber = 1;
 var isInit = false;
 
@@ -22,7 +30,8 @@ function initGame()
             {
                 // start game
                 $("#level-title").text("level 1")
-                $("#startup")[0].play();
+                $("#coc_startup")[0].play();
+                // $("#startup")[0].play();
                 orderOfColorsToPress = [];
                 $("#level-title").text("level 1").removeClass("game-over");
 
@@ -36,7 +45,12 @@ function initGame()
 // check which color is clicked
 function checkClick()
 {
-    
+    //play sounds dynamically
+    $('#blue').click(e => blueSFX.play());
+    $('#green').click(e => greenSFX.play());
+    $('#red').click(e => redSFX.play());
+    $('#yellow').click(e => yellowSFX.play());
+
     $("#green").click(function()
     {
         console.log("green clicked");
@@ -48,6 +62,7 @@ function checkClick()
     $("#red").click(function()
     {
         console.log("red clicked");
+        
         animatePress("red");
         usersCombination.push("red");
         console.log("users: " + usersCombination);
@@ -56,6 +71,7 @@ function checkClick()
     $("#yellow").click(function()
     {
         console.log("yellow clicked");
+
         animatePress("yellow");
         usersCombination.push("yellow");
         console.log("users: " + usersCombination);
@@ -84,7 +100,7 @@ function checkCombination()
     if (orderOfColorsToPress[i] === usersCombination[i])
         {
             generateRandColor();
-            console.log("GOod combinationm");
+            console.log("valid combination");
         }
     else 
         {
@@ -126,6 +142,7 @@ function animatePress(currentColor){
 function main()
 {
     generateRandColor();
+    
 
     checkClick();
 }
