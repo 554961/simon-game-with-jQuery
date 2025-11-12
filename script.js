@@ -33,8 +33,12 @@ function initGame()
             {
                 // start/reset game
                 $("#level-title").text("level 1")
-                $("#among_startup")[0].play();
-                // $("#coc_startup")[0].play();
+
+                // STARTUP SFX
+                //$("#among_startup")[0].play();
+                $("#coc_startup")[0].play();
+
+                //RESETING STATS
                 orderOfColorsToPress = [];
                 usersCombination = [];
                 $("#level-title").text("level 1").removeClass("game-over");
