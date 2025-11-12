@@ -33,9 +33,8 @@ function initGame()
             {
                 // start/reset game
                 $("#level-title").text("level 1")
-                //PLAY 1 of THESE SOUNDS AFTER DEBUGGING
+                $("#among_startup")[0].play();
                 // $("#coc_startup")[0].play();
-                // $("#startup")[0].play();
                 orderOfColorsToPress = [];
                 usersCombination = [];
                 $("#level-title").text("level 1").removeClass("game-over");
@@ -64,9 +63,13 @@ function checkClick()
         animatePress("green");
         usersCombination.push("green");
         console.log("users: " + usersCombination);
-        checkCombination();
-        //Debugging the orderOfColorsToPress and usersCombination
-        document.getElementById("debugging1").firstChild.textContent = usersCombination;
+
+        //using the lenght to check if we should checkCombination
+        if (orderOfColorsToPress.length  === usersCombination.length )
+            {
+                checkCombination();
+            }
+
 
     });
     $("#red").click(function()
@@ -76,9 +79,11 @@ function checkClick()
         animatePress("red");
         usersCombination.push("red");
         console.log("users: " + usersCombination);
-        checkCombination();
-        //Debugging the orderOfColorsToPress and usersCombination
-        document.getElementById("debugging1").firstChild.textContent = usersCombination;
+        if (orderOfColorsToPress.length === usersCombination.length )
+            {
+                checkCombination();
+            }
+
     });
     $("#yellow").click(function()
     {
@@ -87,9 +92,11 @@ function checkClick()
         animatePress("yellow");
         usersCombination.push("yellow");
         console.log("users: " + usersCombination);
-        checkCombination();
-        //Debugging the orderOfColorsToPress and usersCombination
-        document.getElementById("debugging1").firstChild.textContent = usersCombination;
+        if (orderOfColorsToPress.length  === usersCombination.length )
+            {
+                checkCombination();
+            }
+
     });
     $("#blue").click(function()
     {
@@ -97,9 +104,13 @@ function checkClick()
         animatePress("blue");
         usersCombination.push("blue");
         console.log("users: " + usersCombination);
-        checkCombination();
-        //Debugging the orderOfColorsToPress and usersCombination
-        document.getElementById("debugging1").firstChild.textContent = usersCombination;
+        if (orderOfColorsToPress.length  === usersCombination.length )
+            {
+                checkCombination();
+            }
+
+
+            
     });
     
 }
@@ -111,16 +122,18 @@ function checkCombination()
     console.log("users combination: " + usersCombination);
     console.log("current random order: " + orderOfColorsToPress);
 
-    for (i = 0; i < orderOfColorsToPress.length; i++){
+    for (i = 0; i < usersCombination.length; i++){
         if (orderOfColorsToPress[i] === usersCombination[i])
             {
                 
                 console.log("valid combination");
+                // then RESET users COMBO
+                
             }
         else 
             {
                 console.log("NOT valid combination");
-                console.log("game over");
+                console.log()
                 isGameOver = true;
                 
                 $("#level-title").text("GAME OVER").addClass("game-over");
@@ -128,7 +141,8 @@ function checkCombination()
             }
     }
 
-
+    //RESET USER COMBO AFTER CHECKING
+    usersCombination = [];
 
     // then add a new random color after checking if the arrays are equal
     generateRandColor();
@@ -147,9 +161,9 @@ function generateRandColor()
     orderOfColorsToPress.push(color);
 
     console.log("new random order: " + orderOfColorsToPress);
-    // debugging
-    document.getElementById("debugging2").firstChild.textContent = orderOfColorsToPress;
 
+    
+    
 }
 
 //update current level
